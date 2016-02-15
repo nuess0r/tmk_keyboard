@@ -201,7 +201,7 @@ uint8_t matrix_key_count(void)
 
 /* Row pin configuration
  * row: 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15
- * pin: C7 C6 C5 C4 C3 C2 C1 C0 E1 E0 D7 D6 D5 D4 D3 D2
+ * pin: C7 C6 C5 C4 C3 C2 C1 C0 E1 E0 D7 D0 D5 D4 D3 D2
  */
 static void init_rows(void)
 {
@@ -210,8 +210,8 @@ static void init_rows(void)
     PORTC |=  0b11111111;
     DDRE  &= ~0b00000011;
     PORTE |=  0b00000011;
-    DDRD  &= ~0b11111100;
-    PORTD |=  0b11111100;
+    DDRD  &= ~0b10111101;
+    PORTD |=  0b10111101;
 }
 
 static uint16_t read_rows(void)
@@ -227,7 +227,7 @@ static uint16_t read_rows(void)
            (PINE&(1<<1) ? 0 : (1<<8)) |
            (PINE&(1<<0) ? 0 : (1<<9)) |
            (PIND&(1<<7) ? 0 : (1<<10)) |
-           (PIND&(1<<6) ? 0 : (1<<11)) |
+           (PIND&(1<<0) ? 0 : (1<<11)) |
            (PIND&(1<<5) ? 0 : (1<<12)) |
            (PIND&(1<<4) ? 0 : (1<<13)) |
            (PIND&(1<<3) ? 0 : (1<<14)) |
