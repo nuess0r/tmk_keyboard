@@ -21,29 +21,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 void led_set(uint8_t usb_led)
 {
-    if (usb_led & (1<<USB_LED_CAPS_LOCK))
-    {
-        // Output high.
-        DDRB |= (1<<6);
-        PORTB |= (1<<6);
-    }
-    else
-    {
-        // Output low.
-        DDRB &= ~(1<<6);
-        PORTB &= ~(1<<6);
+    DDRB |= (1 << 6) | (1 << 5) | (1 << 4);
+
+    if (usb_led & (1<<USB_LED_CAPS_LOCK)) {
+        PORTB &= ~(1 << 4);
+    } else {
+        PORTB |= (1 << 4);
     }
 
-    if (usb_led & (1<<USB_LED_SCROLL_LOCK))
-    {
-        // Output high.
-        DDRB |= (1<<7);
-        PORTB |= (1<<7);
+    if (usb_led & (1<<USB_LED_SCROLL_LOCK)) {
+        PORTB &= ~(1 << 5);
+    } else {
+        PORTB |= (1 << 5);
     }
-    else
-    {
-        // Output low.
-        DDRB &= ~(1<<7);
-        PORTB &= ~(1<<7);
+
+    if (usb_led & (1<<USB_LED_NUM_LOCK)) {
+        PORTB &= ~(1 << 6);
+    } else {
+        PORTB |= (1 << 6);
     }
 }
