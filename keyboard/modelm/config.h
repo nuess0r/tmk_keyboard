@@ -33,10 +33,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_COLS 16
 
 /* define if matrix has ghost */
-//#define MATRIX_HAS_GHOST
+#define MATRIX_HAS_GHOST
 
 /* Set 0 if need no debouncing */
-#define DEBOUNCE    9
+#define DEBOUNCE    5
+
+/* legacy keymap support */
+// #define USE_LEGACY_KEYMAP
 
 /* Set LED brightness 0-255.
  * This have no effect if sleep LED is enabled. */
