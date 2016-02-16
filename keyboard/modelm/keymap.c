@@ -61,12 +61,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(
-        ESC, F1, F2, F3, F4,  F5, F6, F7, F8,  F9, F10, F11, F12,                   PSCR, SLCK, BRK,
-        GRV, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS, EQL, BSPC,     INS,  HOME, PGUP,    NLCK,PSLS,PAST,PMNS,
+        GRV, F1, F2, F3, F4,  F5, F6, F7, F8,  F9, MRWD, MPLY, MFFD,                MUTE,VOLD,VOLU,
+        ESC, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS, EQL, BSPC,     INS,  HOME, PGUP,    BRK,PSLS,PAST,PMNS,
         TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC, RBRC,BSLS,     DEL, END, PGDN,      P7,  P8,  P9, PPLS,
-        CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,                            P4,  P5,  P6,
+        LCTL,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,                            P4,  P5,  P6,
         LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,          RSFT,          UP,              P1,  P2,  P3, PENT,
-        LCTL,LALT,                  SPC,                           RALT, RCTL,     LEFT,DOWN,RGHT,       P0,       PDOT
+        LCTL,LGUI,                  SPC,                           RGUI, RALT,     LEFT,DOWN,RGHT,       P0,       PDOT
     )
 };
 static const uint16_t PROGMEM fn_actions[] = {
