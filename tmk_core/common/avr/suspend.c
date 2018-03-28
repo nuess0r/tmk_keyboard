@@ -12,64 +12,6 @@
 #include "lufa.h"
 #endif
 
-
-#define wdt_intr_enable(value)   \
-__asm__ __volatile__ (  \
-    "in __tmp_reg__,__SREG__" "\n\t"    \
-    "cli" "\n\t"    \
-    "wdr" "\n\t"    \
-    "sts %0,%1" "\n\t"  \
-    "out __SREG__,__tmp_reg__" "\n\t"   \
-    "sts %0,%2" "\n\t" \
-    : /* no outputs */  \
-    : "M" (_SFR_MEM_ADDR(_WD_CONTROL_REG)), \
-    "r" (_BV(_WD_CHANGE_BIT) | _BV(WDE)), \
-    "r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) | \
-        _BV(WDIE) | (value & 0x07)) ) \
-    : "r0"  \
-)
-
-
-/* Power down MCU with watchdog timer
- * wdto: watchdog timer timeout defined in <avr/wdt.h>
- *          WDTO_15MS
- *          WDTO_30MS
- *          WDTO_60MS
- *          WDTO_120MS
- *          WDTO_250MS
- *          WDTO_500MS
- *          WDTO_1S
- *          WDTO_2S
- *          WDTO_4S
- *          WDTO_8S
- */
-static uint8_t wdt_timeout = 0;
-static void power_down(uint8_t wdto)
-{
-#ifdef PROTOCOL_LUFA
-    if (USB_DeviceState == DEVICE_STATE_Configured) return;
-#endif
-    wdt_timeout = wdto;
-
-    // Watchdog Interrupt Mode
-    wdt_intr_enable(wdto);
-
-    // TODO: more power saving
-    // See PicoPower application note
-    // - I/O port input with pullup
-    // - prescale clock
-    // - BOD disable
-    // - Power Reduction Register PRR
-    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-    sleep_enable();
-    sei();
-    sleep_cpu();
-    sleep_disable();
-
-    // Disable watchdog after sleep
-    wdt_disable();
-}
-
 #ifdef SUSPEND_MODE_STANDBY
 static void standby(void)
 {
