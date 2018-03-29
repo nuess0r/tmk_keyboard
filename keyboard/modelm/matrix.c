@@ -28,7 +28,7 @@ static matrix_row_t matrix[MATRIX_ROWS];
 static matrix_row_t matrix_debouncing[MATRIX_ROWS];
 
 #ifdef MATRIX_HAS_GHOST
-static bool matrix_has_ghost_in_row(uint8_t row);
+bool matrix_has_ghost_in_row(uint8_t row);
 #endif
 static uint16_t read_rows(void);
 static void init_rows(void);
@@ -175,7 +175,7 @@ void matrix_print(void)
 
 #ifdef MATRIX_HAS_GHOST
 inline
-static bool matrix_has_ghost_in_row(uint8_t row)
+bool matrix_has_ghost_in_row(uint8_t row)
 {
     // no ghost exists in case less than 2 keys on
     if (((matrix[row] - 1) & matrix[row]) == 0)
