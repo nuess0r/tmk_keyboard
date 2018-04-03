@@ -36,13 +36,21 @@ void sleep_led_init(void)
 void sleep_led_enable(void)
 {
     /* Enable Compare Match Interrupt */
+#ifdef TIMSK0
     TIMSK1 |= _BV(OCIE1A);
+#else
+    TIMSK |= _BV(OCIE1A);
+#endif
 }
 
 void sleep_led_disable(void)
 {
     /* Disable Compare Match Interrupt */
+#ifdef TIMSK0
     TIMSK1 &= ~_BV(OCIE1A);
+#else
+    TIMSK &= ~_BV(OCIE1A);
+#endif
 }
 
 
