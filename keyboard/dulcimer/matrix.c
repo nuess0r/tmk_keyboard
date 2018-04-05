@@ -111,16 +111,6 @@ matrix_row_t matrix_get_row(uint8_t row)
     return matrix[row];
 }
 
-/*
-void matrix_print(void)
-{
-    print("\nr/c 0123456789ABCDEF\n");
-    for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
-        xprintf("%02X: %032lb\n", row, bitrev32(matrix_get_row(row)));
-    }
-}
-*/
-
 void matrix_print(void)
 {
     print("\nr/c 01234567\n");
