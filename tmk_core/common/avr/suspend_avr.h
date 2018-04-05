@@ -7,7 +7,7 @@
 #include <avr/wdt.h>
 #include <avr/interrupt.h>
 
-
+#ifndef NO_SUSPEND_POWER_DOWN
 #define wdt_intr_enable(value)   \
 __asm__ __volatile__ (  \
     "in __tmp_reg__,__SREG__" "\n\t"    \
@@ -23,5 +23,6 @@ __asm__ __volatile__ (  \
         _BV(WDIE) | (value & 0x07)) ) \
     : "r0"  \
 )
+#endif
 
 #endif

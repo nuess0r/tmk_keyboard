@@ -28,6 +28,7 @@ volatile uint32_t timer_count = 0;
 
 void timer_init(void)
 {
+#ifndef TIMER0_COMP
     // Timer0 CTC mode
     TCCR0A = 0x02;
 
@@ -46,10 +47,33 @@ void timer_init(void)
 #endif
 
     OCR0A = TIMER_RAW_TOP;
+
 #ifdef TIMSK0
     TIMSK0 = (1<<OCIE0A);
 #else
     TIMSK = (1<<OCIE0A);
+#endif
+
+#else //TIMER0_COMP
+
+#if TIMER_PRESCALER == 1
+    TCCR0 = 0x01;
+#elif TIMER_PRESCALER == 8
+    TCCR0 = 0x02;
+#elif TIMER_PRESCALER == 64
+    TCCR0 = 0x03;
+#elif TIMER_PRESCALER == 256
+    TCCR0 = 0x04;
+#elif TIMER_PRESCALER == 1024
+    TCCR0 = 0x05;
+#else
+#   error "Timer prescaler value is NOT vaild."
+#endif
+
+    // Timer0 CTC mode
+    TCCR0 |= (1<<WGM01);
+    OCR0 = TIMER_RAW_TOP;
+    TIMSK = (1<<OCIE0);
 #endif
 }
 
@@ -115,7 +139,11 @@ uint32_t timer_elapsed32(uint32_t last)
 }
 
 // excecuted once per 1ms.(excess for just timer count?)
+#ifndef TIMER0_COMP
 ISR(TIMER0_COMPA_vect)
+#else
+ISR(TIMER0_COMP_vect)
+#endif
 {
     timer_count++;
 }

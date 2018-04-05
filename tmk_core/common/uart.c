@@ -1,5 +1,6 @@
 // TODO: Teensy support(ATMega32u4/AT90USB128)
 // Fixed for Arduino Duemilanove ATmega168p by Jun Wako
+// Modified for ATmega32 by Christoph Zimmermann
 /* UART Example for Teensy USB Development Board
  * http://www.pjrc.com/teensy/
  * Copyright (c) 2009 PJRC.COM, LLC
@@ -47,10 +48,17 @@ static volatile uint8_t rx_buffer_tail;
 void uart_init(uint32_t baud)
 {
 	cli();
+#ifndef UCSR
 	UBRR0 = (F_CPU / 4 / baud - 1) / 2;
 	UCSR0A = (1<<U2X0);
 	UCSR0B = (1<<RXEN0) | (1<<TXEN0) | (1<<RXCIE0);
 	UCSR0C = (1<<UCSZ01) | (1<<UCSZ00);
+#elseif
+	UBRRL = (F_CPU / 4 / baud - 1) / 2;
+	UCSRA = (1<<U2X);
+	UCSRB = (1<<RXEN) | (1<<TXEN) | (1<<RXCIE);
+	UCSRC = (1<<UCSZ1) | (1<<UCSZ0);
+#endif
 	tx_buffer_head = tx_buffer_tail = 0;
 	rx_buffer_head = rx_buffer_tail = 0;
 	sei();
@@ -67,7 +75,7 @@ void uart_putchar(uint8_t c)
 	//cli();
 	tx_buffer[i] = c;
 	tx_buffer_head = i;
-	UCSR0B = (1<<RXEN0) | (1<<TXEN0) | (1<<RXCIE0) | (1<<UDRIE0);
+	UCSRB = (1<<RXEN) | (1<<TXEN) | (1<<RXCIE) | (1<<UDRIE);
 	//sei();
 }
 
@@ -104,21 +112,21 @@ ISR(USART_UDRE_vect)
 
 	if (tx_buffer_head == tx_buffer_tail) {
 		// buffer is empty, disable transmit interrupt
-		UCSR0B = (1<<RXEN0) | (1<<TXEN0) | (1<<RXCIE0);
+		UCSRB = (1<<RXEN) | (1<<TXEN) | (1<<RXCIE);
 	} else {
 		i = tx_buffer_tail + 1;
 		if (i >= TX_BUFFER_SIZE) i = 0;
-		UDR0 = tx_buffer[i];
+		UDR = tx_buffer[i];
 		tx_buffer_tail = i;
 	}
 }
 
 // Receive Interrupt
-ISR(USART_RX_vect)
+ISR(USART_RXC_vect)
 {
 	uint8_t c, i;
 
-	c = UDR0;
+	c = UDR;
 	i = rx_buffer_head + 1;
 	if (i >= RX_BUFFER_SIZE) i = 0;
 	if (i != rx_buffer_tail) {

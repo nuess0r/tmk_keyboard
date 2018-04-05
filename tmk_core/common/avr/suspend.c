@@ -13,6 +13,7 @@
 #endif
 
 
+#ifndef NO_SUSPEND_POWER_DOWN
 #define wdt_intr_enable(value)   \
 __asm__ __volatile__ (  \
     "in __tmp_reg__,__SREG__" "\n\t"    \
@@ -69,6 +70,7 @@ static void power_down(uint8_t wdto)
     // Disable watchdog after sleep
     wdt_disable();
 }
+#endif
 
 #ifdef SUSPEND_MODE_STANDBY
 static void standby(void)
