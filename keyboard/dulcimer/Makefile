@@ -18,6 +18,9 @@ CONFIG_H ?= config.h
 # MCU name
 MCU ?= atmega32
 
+# Defines needed to use correct registers for the atmega32
+OPT_DEFS += -DUCSR -DNO_CLKPR -DTIMER0_COMP -DTIMER_PRESCALER=1024
+
 # Processor frequency.
 #     This will define a symbol, F_CPU, in all source code files equal to the
 #     processor frequency in Hz. You can then use this symbol in your source code to
@@ -70,7 +73,7 @@ COMMAND_ENABLE ?= yes	# Commands for debug and configuration
 SLEEP_LED_ENABLE ?= no	# Breathing sleep LED during USB suspend
 NKRO_ENABLE ?= no	# USB Nkey Rollover
 ACTIONMAP_ENABLE ?= no	# Use 16bit action codes in keymap instead of 8bit keycodes
-NO_UART = yes # UART is unavailable
+NO_UART = yes 		# UART is unavailable
 
 
 # Optimize size but this may cause error "relocation truncated to fit"
@@ -140,8 +143,6 @@ program: $(TARGET).hex $(TARGET).eep
 # Set fuses.
 fuse:
 	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_FUSEBITS)
-
-
 
 # Listing of phony targets.
 .PHONY : all sizebefore sizeafter gccversion \
