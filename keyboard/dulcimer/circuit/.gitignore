@@ -1,0 +1,6 @@
+*.dcm
+dulcimer-cache.lib
+*.kicad_pcb-bak
+*.net
+*.cmp
+
