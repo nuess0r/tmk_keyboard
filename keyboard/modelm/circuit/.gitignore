@@ -1,0 +1,6 @@
+*.dcm
+modelm_teensy-cache.lib
+*.kicad_pcb-bak
+*.net
+*.cmp
+
