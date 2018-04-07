@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name dulcimer)(type KiCad)(uri "$(KIPRJMOD)/dulcimer.pretty")(options "")(descr ""))
+)
