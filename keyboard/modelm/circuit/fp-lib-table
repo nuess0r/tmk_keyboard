@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name dulcimer)(type KiCad)(uri "$(KIPRJMOD)/dulcimer.pretty")(options "")(descr ""))
+  (lib (name TEENSYPP2)(type Legacy)(uri "$(KIPRJMOD)/KiCAD_teensypp2/TEENSYPP2.mod")(options "")(descr ""))
+)
