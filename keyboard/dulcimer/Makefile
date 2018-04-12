@@ -68,8 +68,8 @@ BOOTMAGIC_ENABLE ?= yes	# Virtual DIP switch configuration(+1000)
 MOUSEKEY_ENABLE ?= yes	# Mouse keys(+4700)
 EXTRAKEY_ENABLE ?= yes	# Audio control and System control(+450)
 CONSOLE_ENABLE ?= yes	# Console for debug(+400)
-COMMAND_ENABLE ?= yes	# Commands for debug and configuration
-#TODO use timer0 instead of timer1 and then enable sleep led
+COMMAND_ENABLE ?= no	# Commands for debug and configuration
+#TODO enable and test sleep led
 SLEEP_LED_ENABLE ?= no	# Breathing sleep LED during USB suspend
 NKRO_ENABLE ?= no	# USB Nkey Rollover
 ACTIONMAP_ENABLE ?= no	# Use 16bit action codes in keymap instead of 8bit keycodes
