@@ -57,7 +57,7 @@ OPT_DEFS += -DINTERRUPT_CONTROL_ENDPOINT
 #   Atmel DFU loader 4096
 #   LUFA bootloader  4096
 #   USBaspLoader     2048
-BOOTLOADER_SIZE ?= 4096
+BOOTLOADER_SIZE ?= 2048
 OPT_DEFS += -DBOOTLOADER_SIZE=$(BOOTLOADER_SIZE)
 
 
@@ -93,13 +93,11 @@ include $(TMK_DIR)/rules.mk
 
 AVRDUDE ?= avrdude
 
-# Programming hardware: alf avr910 avrisp bascom bsd 
-# dt006 pavr picoweb pony-stk200 sp12 stk200 stk500
-#
-# Type: avrdude -c ?
+# Programming hardware, type: avrdude -c ?
 # to get a full listing.
 #
-AVRDUDE_PROGRAMMER ?= STK500
+# This setting asumes, that you flashed the bootloader first
+AVRDUDE_PROGRAMMER ?= usbasp
 
 # com1 = serial port. Use lpt1 to connect to parallel port.
 AVRDUDE_PORT ?=  /dev/ttyACM0   # programmer connected to serial device
@@ -109,10 +107,11 @@ AVRDUDE_WRITE_FLASH ?= -U flash:w:$(TARGET).hex
 
 # Brown-out detection level at VCC=2.7 V; [BODLEVEL=1]
 # Ext. Crystal Osc.; High Frequency; Start-up time PWRDWN/RESET: 1024 clk + 64 ms; [CKSEL=1111 SUT=00]
+# Boot Reset vector Enabled (Jump to bootloader first)
 # Serial program downloading (SPI) enabled; [SPIEN=0]
 # Watch-dog Timer disabled; [WDTON=0]
 # Self Programming disabled; [SELFPRGEN=0]
-AVRDUDE_FUSEBITS ?= -U lfuse:w:0x8F:m -U hfuse:w:0xC9:m
+AVRDUDE_FUSEBITS ?= -U lfuse:w:0x8F:m -U hfuse:w:0xC8:m
 
 
 # Uncomment the following if you want avrdude's erase cycle counter.
