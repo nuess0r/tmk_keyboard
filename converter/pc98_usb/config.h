@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CONFIG_H
 
 #define VENDOR_ID       0xFEED
-#define PRODUCT_ID      0x9898
-#define DEVICE_VER      0x0100
+#define PRODUCT_ID      0x9801
+#define DEVICE_VER      0x0101
 #define MANUFACTURER    t.m.k.
 #define PRODUCT         PC98 keyboard converter
 #define DESCRIPTION     converts PC98 keyboard protocol into USB
@@ -32,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* key combination for command */
 #define IS_COMMAND()    ( \
-    keyboard_report->keys[0] == KC_STOP || \
+    matrix_is_on(12, 0) || /* STOP */ \
     keyboard_report->mods == (MOD_BIT(KC_LALT) | MOD_BIT(KC_RALT)) \
 )
 
@@ -43,7 +43,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LOCKING_RESYNC_ENABLE
 
 /* Control LED indicatiors, which doesn't work well with locking support */
-//#define PC98_LED_CONTROL
+#define PC98_LED_CONTROL
 
 
 /* PC98 Reset Port shared with TXD */
@@ -64,8 +64,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *     asynchronous, positive logic, 19200baud, bit order: LSB first
  *     1-start bit, 8-data bit, odd parity, 1-stop bit
  */
+
 /*
  * Software Serial
+ *   Add protocol/serial_soft.c to SRC in Makefile
  */
 #define SERIAL_SOFT_BAUD                19200
 #define SERIAL_SOFT_PARITY_ODD
@@ -110,6 +112,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /*
  * Hardware Serial(UART)
+ *   Add protocol/serial_uart.c to SRC in Makefile
  */
 #if defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega32U2__)
     #define SERIAL_UART_BAUD       19200
