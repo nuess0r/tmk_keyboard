@@ -24,8 +24,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT_ID      0x6464
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    TMK
-#define PRODUCT         Alps64
-#define DESCRIPTION     TMK keyboard firmware for Dulcimer
+#define PRODUCT         Dulcimer
+#define DESCRIPTION     TMK keyboard firmware for Dulcimer (IBM Model M)
 
 /* key matrix size */
 #define MATRIX_ROWS 16
@@ -46,8 +46,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define IS_COMMAND() ( \
     keyboard_report->mods == (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT)) \
 )
-
-
 
 /*
  * Feature disable options

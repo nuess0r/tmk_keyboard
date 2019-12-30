@@ -161,8 +161,8 @@ static void init_rows(void)
     // Input with pull-up(DDR:0, PORT:1)
     DDRA  &= ~0b11111111;
     PORTA |=  0b11111111;
-    DDRC  &= ~0b00000011;
-    PORTC |=  0b00000011;
+    DDRC  &= ~0b11111111;
+    PORTC |=  0b11111111;
 }
 
 static uint16_t read_rows(void)
