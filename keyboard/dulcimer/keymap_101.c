@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* 
+/*
  * Keymap for Phantom controller
  */
 #include <stdint.h>
@@ -37,8 +37,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     K4A, K4B, K4C, K4D, K4E, K4F, K4G, K4H, K4I, K4J, K4K, K4L, K4M, K4N,   K4O, K4P, K4Q,   K4R, K4S, K4T, K4U, \
     K3A, K3B, K3C, K3D, K3E, K3F, K3G, K3H, K3I, K3J, K3K, K3L, K3M, K3N,   K3O, K3P, K3Q,   K3R, K3S, K3T, K3U, \
     K2A, K2B, K2C, K2D, K2E, K2F, K2G, K2H, K2I, K2J, K2K, K2L, K2M,                         K2N, K2O, K2P, \
-    K1A, K1AA, K1B, K1C, K1D, K1E, K1F, K1G, K1H, K1I, K1J, K1K, K1L,            K1M,        K1N, K1O, K1P, K1Q, \
-    K0A, K0B, K0C, K0D, K0E,                                                K0F, K0G, K0H,   K0I,      K0J \
+    K1A, K1B, K1C, K1D, K1E, K1F, K1G, K1H, K1I, K1J, K1K, K1L,                  K1M,        K1N, K1O, K1P, K1Q, \
+    K0A, K0B,                        K0C,             K0D, K0E,             K0F, K0G, K0H,   K0I,      K0J \
 ) { \
 /* 00 */ { KC_NO,    KC_NO,    KC_##K0A, KC_NO,    KC_NO,    KC_NO,    KC_##K0E, KC_NO    }, \
 /* 01 */ { KC_NO,    KC_##K1A, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##K1L, KC_NO    }, \
@@ -61,11 +61,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 static const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KEYMAP(
-        ESC, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11,  F12,                PSCR,SLCK,PAUS,
+        ESC, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12,            PSCR, SLCK, PAUS,
         GRV, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS, EQL, BSPC,     INS,  HOME, PGUP,    NLCK,PSLS,PAST,PMNS,
         TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC, RBRC,BSLS,     DEL, END, PGDN,      P7,  P8,  P9, PPLS,
-        CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,                            P4,  P5,  P6,
-        LSFT,<, Z,   X,   C,   V,   B,   N,   M,  COMM,DOT, SLSH,          RSFT,          UP,              P1,  P2,  P3, PENT,
+        LGUI,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,                            P4,  P5,  P6,
+        LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,          RSFT,          UP,              P1,  P2,  P3, PENT,
         LCTL,LALT,                  SPC,                           RALT, RCTL,     LEFT,DOWN,RGHT,       P0,       PDOT
     )
 };
