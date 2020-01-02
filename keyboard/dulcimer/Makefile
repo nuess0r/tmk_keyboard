@@ -19,7 +19,7 @@ CONFIG_H ?= config.h
 MCU ?= atmega32
 
 # Defines needed to use correct registers for the atmega32
-OPT_DEFS += -DUCSR -DNO_CLKPR -DTIMER0_COMP -DTIMER_PRESCALER=1024
+OPT_DEFS += -DNO_CLKPR -DTIMER0_COMP -DTIMER_PRESCALER=1024
 
 # Processor frequency.
 #     This will define a symbol, F_CPU, in all source code files equal to the
@@ -67,13 +67,12 @@ OPT_DEFS += -DBOOTLOADER_SIZE=$(BOOTLOADER_SIZE)
 BOOTMAGIC_ENABLE ?= yes	# Virtual DIP switch configuration(+1000)
 MOUSEKEY_ENABLE ?= yes	# Mouse keys(+4700)
 EXTRAKEY_ENABLE ?= yes	# Audio control and System control(+450)
-CONSOLE_ENABLE ?= yes	# Console for debug(+400)
-COMMAND_ENABLE ?= no	# Commands for debug and configuration
-#TODO enable and test sleep led
+CONSOLE_ENABLE ?= no	# Console for debug disabled, disables also UART RX
+COMMAND_ENABLE ?= yes	# Commands for debug and configuration
 SLEEP_LED_ENABLE ?= no	# Breathing sleep LED during USB suspend
 NKRO_ENABLE ?= no	# USB Nkey Rollover
 ACTIONMAP_ENABLE ?= no	# Use 16bit action codes in keymap instead of 8bit keycodes
-NO_UART = yes 		# UART is unavailable
+NO_UART = yes 		# UART for debugging
 
 
 # Optimize size but this may cause error "relocation truncated to fit"
@@ -124,7 +123,7 @@ AVRDUDE_FUSEBITS ?= -U lfuse:w:0x8F:m -U hfuse:w:0xC8:m
 #AVRDUDE_NO_VERIFY ?= -V
 
 # Increase verbosity level.  Please use this when submitting bug
-# reports about avrdude. See <http://savannah.nongnu.org/projects/avrdude> 
+# reports about avrdude. See <http://savannah.nongnu.org/projects/avrdude>
 # to submit bug reports.
 #AVRDUDE_VERBOSE ?= -v -v
 
