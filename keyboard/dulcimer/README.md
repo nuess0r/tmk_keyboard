@@ -32,6 +32,47 @@ remapped to more modern use cases:
 - Scroll lock is now Volume up
 - Break is now Volume down
 
+Boot Magic Configuration - Virtual DIP Switch
+---------------------------------------------
+Boot Magic are executed during boot up time. Press Magic key below then plug in keyboard cable.
+Note that you must use keys of **Layer 0** as Magic keys. These settings are stored in EEPROM so that retain your configure over power cycles.
+
+To avoid configuring accidentally additive salt key `KC_INS` also needs to be pressed along with the following configuration keys. The salt key on the Model M is `insert` instead of the TMK default `space`!
+
+#### General
+- Skip reading EEPROM to start with default configuration(`ESC`)
+- Clear configuration stored in EEPROM to reset configuration(`Backspace`)
+
+#### Bootloader
+- Kick up Bootloader(`B`)
+
+#### Debug
+- Debug enable(`D`)
+- Debug matrix enable(`D`+`X`)
+- Debug keyboard enable(`D`+`K`)
+- Debug mouse enable(`D`+`M`)
+
+#### Keymap
+- Swap Control and CapsLock(`Left Control`)
+- Change CapsLock to Control(`Caps Lock`)
+- Swap LeftAlt and Gui(`Left Alt`)
+- Swap RightAlt and Gui(`Right Alt`)
+- Disable Gui(`Left Gui`)
+- Swap Grave and Escape(`Grave`)
+- Swap BackSlash and BackSpace(`Back Slash`)
+- Enable NKRO on boot(`N`)
+
+#### Default Layer
+- Set Default Layer to 0(`0`)
+- Set Default Layer to 1(`1`)
+- Set Default Layer to 2(`2`)
+- Set Default Layer to 3(`3`)
+- Set Default Layer to 4(`4`)
+- Set Default Layer to 5(`5`)
+- Set Default Layer to 6(`6`)
+- Set Default Layer to 7(`7`)
+
+
 Hardware
 ---------
 
@@ -66,6 +107,7 @@ Enter the bootloader directory and execute
     make
 
 Use avrdude with your programmer settings adjusted:
+
     avrdude -P /dev/ttyACM0 -c STK500 -p atmega32 -U flash:w:obj/main.hex -U hfuse:w:0xc8:m -U lfuse:w:0x8f:m
 
 ### TMK Firmware
@@ -83,6 +125,7 @@ If your bootloader is loaded and recognized by your OS you can flash it with a s
     make program
 
 or use again avrdude with your programmer settings adjusted:
+
     avrdude -P /dev/ttyACM0 -c STK500 -p atmega32 -U flash:w:dulcimer.hex
 
 Debugging

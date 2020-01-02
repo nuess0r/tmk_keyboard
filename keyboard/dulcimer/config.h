@@ -47,6 +47,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     keyboard_report->mods == (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT)) \
 )
 
+/* boot magic salt key is set to "insert" instead of the default "space"
+ * because it conflicts with backspace on the Model M */
+#define BOOTMAGIC_KEY_SALT KC_INS
+
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.
