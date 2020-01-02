@@ -164,11 +164,19 @@ ISR(UDRE_vect)
 }
 
 // Receive Interrupt
+<<<<<<< HEAD:tmk_core/common/avr/uart.c
 ISR(USART_RXC_vect)
 {
 	uint8_t c, i;
 
 	c = UDR;
+=======
+ISR(RX_vect)
+{
+	uint8_t c, i;
+
+	c = UDRn;
+>>>>>>> 3b21f85e9bb731adcbd40be1b93b7d39ef7748c5:tmk_core/common/uart.c
 	i = rx_buffer_head + 1;
 	if (i >= RX_BUFFER_SIZE) i = 0;
 	if (i != rx_buffer_tail) {
