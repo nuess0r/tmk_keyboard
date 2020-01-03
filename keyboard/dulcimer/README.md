@@ -110,6 +110,9 @@ Use avrdude with your programmer settings adjusted:
 
     avrdude -P /dev/ttyACM0 -c STK500 -p atmega32 -U flash:w:obj/main.hex -U hfuse:w:0xc8:m -U lfuse:w:0x8f:m
 
+    avrdude -c dragon_isp -B 5 -p atmega32 -U flash:w:obj/main.hex -U hfuse:w:0xc8:m -U lfuse:w:0x8f:m
+
+
 ### TMK Firmware
 
 After you flashed the bootloader you can make and flash the TMK firmware.
@@ -120,13 +123,14 @@ Rename the desired keymap file to `keymap.c` and build the firmware:
 
     make
 
-If your bootloader is loaded and recognized by your OS you can flash it with a simple
+The bootloader is loaded only for a few seconds before the TMK firmware gets loaded.
+Flash the firwmare during this short period with a simple:
 
     make program
 
-or use again avrdude with your programmer settings adjusted:
+or use again avrdude with the settings adjusted for the usbasp bootloader:
 
-    avrdude -P /dev/ttyACM0 -c STK500 -p atmega32 -U flash:w:dulcimer.hex
+    avrdude -p atmega32 -P /dev/ttyACM0 -c usbasp -U flash:w:dulcimer.hex -U lfuse:w:0x8F:m -U hfuse:w:0xC8:m
 
 Debugging
 ---------
@@ -139,4 +143,5 @@ It is 5 V TTL, so you will need a RS232 level shifter or a 5 V tolerant USB
 serial adapter (you can use two resistors to build a voltage divider to
 protect your 3.3 V tolerant adapter)
 
-You can enable the debug messages by pressing the magic command `LShift` + `RShift` + `d`
+You have to set `NO_UART = no` in the Makefile and after flashing you can enable
+the debug messages by pressing the magic command `LShift` + `RShift` + `d`
