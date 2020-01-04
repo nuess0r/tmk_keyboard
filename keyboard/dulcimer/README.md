@@ -18,12 +18,12 @@ for all the work to create the Model M keymap)
 Keymaps
 -------
 
-By default this TMK firmware provides a classical QUERTY layout for 101 keys.
+By default this TMK firmware provides a classical QUERTY layout for 101/103 keys.
 
-The project provides additional keymaps with multimedia keys and for 103 keys.
+The project provides an additional modernized keymap with multimedia keys.
 See Building Yourself how to build the firmware with this optional mappings.
 
-In the variant keymap_101_modernized.c (and the same for 103 keys) some keys are
+In the variant keymap_modernized.c some keys are
 remapped to more modern use cases:
 - Caps lock is now Windows Key or Command key in Mac
 - F11 is now Media Play
